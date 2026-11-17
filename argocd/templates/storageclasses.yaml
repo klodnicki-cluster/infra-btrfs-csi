@@ -10,6 +10,7 @@ provisioner: btrfs.csi.local
 parameters:
   pool: {{ .pool | quote }}
   cow: {{ .cow | quote }}
+  compression: {{ .compression | quote }}
 reclaimPolicy: {{ .reclaimPolicy }}
 volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true

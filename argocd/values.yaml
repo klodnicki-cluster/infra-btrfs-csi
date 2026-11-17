@@ -4,35 +4,23 @@ driver:
   poolsHostPath: /var/mnt
 
 storageClasses:
-  - name: hot-retain-cow
+  - name: hot-retain
     pool: storage-hot
     reclaimPolicy: Retain
     cow: true
-  - name: hot-retain-inplace
-    pool: storage-hot
-    reclaimPolicy: Retain
-    cow: false
-  - name: hot-delete-cow
+    compression: zstd
+  - name: hot-delete
     pool: storage-hot
     reclaimPolicy: Delete
     cow: true
-  - name: hot-delete-inplace
-    pool: storage-hot
-    reclaimPolicy: Delete
-    cow: false
-  - name: archive-retain-cow
+    compression: zstd
+  - name: archive-retain
     pool: storage-archive
     reclaimPolicy: Retain
     cow: true
-  - name: archive-retain-inplace
-    pool: storage-archive
-    reclaimPolicy: Retain
-    cow: false
-  - name: archive-delete-cow
+    compression: zstd
+  - name: archive-delete
     pool: storage-archive
     reclaimPolicy: Delete
     cow: true
-  - name: archive-delete-inplace
-    pool: storage-archive
-    reclaimPolicy: Delete
-    cow: false
+    compression: zstd
