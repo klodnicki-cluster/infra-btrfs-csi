@@ -13,32 +13,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '-3'
 ---
-allowVolumeExpansion: true
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: btrfs-archive
-  annotations:
-    argocd.argoproj.io/sync-wave: '1'
-parameters:
-  pool: storage-archive
-provisioner: btrfs.csi.local
-reclaimPolicy: Delete
-volumeBindingMode: WaitForFirstConsumer
----
-allowVolumeExpansion: true
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: btrfs-hot
-  annotations:
-    argocd.argoproj.io/sync-wave: '1'
-parameters:
-  pool: storage-hot
-provisioner: btrfs.csi.local
-reclaimPolicy: Delete
-volumeBindingMode: WaitForFirstConsumer
----
 apiVersion: v1
 kind: ServiceAccount
 metadata:

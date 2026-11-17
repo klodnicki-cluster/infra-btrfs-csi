@@ -13,14 +13,28 @@ The host's `/var/mnt` is mounted at `/var/lib/btrfs-csi` inside the driver.
 The worker filesystems must already be formatted as btrfs and mounted by Talos.
 This deployment does not format disks or change the Talos machine configuration.
 
-| Talos Mount | Pool | StorageClass | VolumeSnapshotClass |
-| --- | --- | --- | --- |
-| `/var/mnt/storage-hot` | `storage-hot` | `btrfs-hot` | `btrfs-hot` |
-| `/var/mnt/storage-archive` | `storage-archive` | `btrfs-archive` | `btrfs-archive` |
+| Talos Mount | Pool | VolumeSnapshotClass |
+| --- | --- | --- |
+| `/var/mnt/storage-hot` | `storage-hot` | `btrfs-hot` |
+| `/var/mnt/storage-archive` | `storage-archive` | `btrfs-archive` |
 
-Neither StorageClass is the default. Volumes are node-local and use
-`WaitForFirstConsumer` binding. Both classes allow expansion and use the
-`Delete` reclaim policy.
+| StorageClass | Pool | Reclaim Policy | Copy-on-Write |
+| --- | --- | --- | --- |
+| `hot-retain-cow` | `storage-hot` | Retain | Enabled |
+| `hot-retain-inplace` | `storage-hot` | Retain | Disabled |
+| `hot-delete-cow` | `storage-hot` | Delete | Enabled |
+| `hot-delete-inplace` | `storage-hot` | Delete | Disabled |
+| `archive-retain-cow` | `storage-archive` | Retain | Enabled |
+| `archive-retain-inplace` | `storage-archive` | Retain | Disabled |
+| `archive-delete-cow` | `storage-archive` | Delete | Enabled |
+| `archive-delete-inplace` | `storage-archive` | Delete | Disabled |
+
+No StorageClass is the default. Volumes are node-local and use
+`WaitForFirstConsumer` binding. All classes allow expansion. The `inplace`
+variants set the driver's `cow` parameter to `"false"`; the `cow` variants
+set it to `"true"`. With `Retain`, deleting a PVC leaves its PV and data for
+manual reclamation. With `Delete`, deleting a PVC also reclaims its PV and data.
+StorageClasses are configured in `argocd/values.yaml`.
 
 ## Deployment
 

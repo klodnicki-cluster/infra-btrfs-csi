@@ -1,0 +1,16 @@
+{{- range .Values.storageClasses }}
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+provisioner: btrfs.csi.local
+parameters:
+  pool: {{ .pool | quote }}
+  cow: {{ .cow | quote }}
+reclaimPolicy: {{ .reclaimPolicy }}
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+{{- end }}
