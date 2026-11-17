@@ -6,6 +6,9 @@ metadata:
   name: {{ .name }}
   annotations:
     argocd.argoproj.io/sync-wave: "1"
+    {{- if .default }}
+    storageclass.kubernetes.io/is-default-class: "true"
+    {{- end }}
 provisioner: btrfs.csi.local
 parameters:
   pool: {{ .pool | quote }}

@@ -25,7 +25,7 @@ This deployment does not format disks or change the Talos machine configuration.
 | `archive-retain` | `storage-archive` | Retain | Enabled | ZSTD |
 | `archive-delete` | `storage-archive` | Delete | Enabled | ZSTD |
 
-No StorageClass is the default. Volumes are node-local and use
+`hot-delete` is the default StorageClass. Volumes are node-local and use
 `WaitForFirstConsumer` binding. All classes allow expansion and default to
 `cow: "true"` and `compression: "zstd"`. With `Retain`, deleting a PVC leaves its
 PV and data for manual reclamation. With `Delete`, deleting a PVC also reclaims

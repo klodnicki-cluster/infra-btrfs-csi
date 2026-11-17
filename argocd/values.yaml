@@ -10,6 +10,7 @@ storageClasses:
     cow: true
     compression: zstd
   - name: hot-delete
+    default: true
     pool: storage-hot
     reclaimPolicy: Delete
     cow: true
