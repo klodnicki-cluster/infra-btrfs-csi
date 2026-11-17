@@ -1,5 +1,5 @@
 driver:
-  # Fork build from commit 435fc315082d45c97e258ed06c4974364752da7e.
+  # Renovate follows published builds of the fork's latest image by digest.
   image: ghcr.io/klodzack/btrfs-csi-driver:latest@sha256:71d0a235cfa47220730d91c1a957f5d85ee4b3f29122a28e185a34ed8afc1e03
   poolsHostPath: /var/mnt
 

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["helm-values"],
+  "helm-values": {
+    "pinDigests": true
+  },
+  "packageRules": [
+    {
+      "description": "Automatically deploy new builds of the fork's latest image",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/klodzack/btrfs-csi-driver"],
+      "matchUpdateTypes": ["digest", "pinDigest"],
+      "automerge": true,
+      "platformAutomerge": false,
+      "ignoreTests": true
+    }
+  ]
+}

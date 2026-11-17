@@ -60,8 +60,10 @@ kubectl -n infra-btrfs-csi get pods
 Driver manifests are vendored from the `klodzack/btrfs-csi` fork at commit
 `ea0b5c45a8ec3c5203e258c64383d7a62ccf5c7a`, with the Talos mount mapping and
 pool classes used in the manual deployment. The driver image is pinned in
-`argocd/values.yaml` to the fork's published build from commit
-`435fc315082d45c97e258ed06c4974364752da7e`, not the upstream `mporrato` image.
+`argocd/values.yaml` to the fork's `latest` image digest, not the upstream
+`mporrato` image. Renovate updates and automerges driver digest changes;
+Argo CD then deploys the updated pin. These merges do not require CI checks
+because this repository currently has none. Other images are not auto-updated.
 
 Snapshot CRDs, RBAC, and controller manifests are vendored from
 `kubernetes-csi/external-snapshotter` tag `v8.0.0`. The controller image is also
